@@ -1,7 +1,6 @@
 # -*- coding: future_fstrings -*-
 import sys
-from scabha import config, parameters_dict, prun, parse_parameters
-
+from scabha import config, parameters_dict, prun, parse_parameters, log
 """
 config: 
     contains the sections before parameters in params.json
@@ -19,6 +18,8 @@ args = [config.binary] + parse_parameters(parameters_dict)
 # run the command
 
 if prun(args) != 0:
-    sys.exit(1)
+    #sys.exit(1)
+    log.warning("Something is wrong with gain table {}. Please see associated error. Skipping".format(
+           parameters_dict["files"][0]))
 
 
